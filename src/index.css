@@ -1,0 +1,70 @@
+:root {
+  color-scheme: light;
+  --app-bg: #ffffff;
+  --app-surface: #ffffff;
+  --app-surface-alt: #f8fafc;
+  --app-text: #0f172a;
+  --app-muted: #64748b;
+  --app-border: #e2e8f0;
+  --app-accent: #0d6efd;
+  --app-accent-soft: rgba(13, 110, 253, 0.08);
+  --app-shadow: 0 1.5rem 4rem rgba(15, 23, 42, 0.12);
+  --app-card-shadow: 0 0.75rem 2rem rgba(15, 23, 42, 0.04);
+  --app-avatar-bg: linear-gradient(145deg, #dbeafe, #bfdbfe);
+  --app-avatar-text: #1d4ed8;
+  --bs-body-bg: var(--app-bg);
+  --bs-body-color: var(--app-text);
+  --bs-secondary-color: var(--app-muted);
+  --bs-tertiary-bg: var(--app-surface-alt);
+  --bs-border-color: var(--app-border);
+  --bs-card-bg: var(--app-surface);
+  --bs-card-border-color: var(--app-border);
+  --bs-heading-color: var(--app-text);
+  --bs-link-color: var(--app-accent);
+  --bs-link-hover-color: var(--app-accent);
+  --bs-body-font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --app-bg: #0b1220;
+  --app-surface: #111b2b;
+  --app-surface-alt: #0f1929;
+  --app-text: #e2e8f0;
+  --app-muted: #a0aec0;
+  --app-border: #29384d;
+  --app-accent: #8ab4ff;
+  --app-accent-soft: rgba(138, 180, 255, 0.1);
+  --app-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.4);
+  --app-card-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.18);
+  --app-avatar-bg: linear-gradient(145deg, #1d3556, #284b75);
+  --app-avatar-text: #dbeafe;
+  --bs-body-bg: var(--app-bg);
+  --bs-body-color: var(--app-text);
+  --bs-secondary-color: var(--app-muted);
+  --bs-tertiary-bg: var(--app-surface-alt);
+  --bs-border-color: var(--app-border);
+  --bs-card-bg: var(--app-surface);
+  --bs-card-border-color: var(--app-border);
+  --bs-heading-color: var(--app-text);
+  --bs-link-color: var(--app-accent);
+  --bs-link-hover-color: #b7d1ff;
+}
+
+body {
+  margin: 0;
+  background-color: var(--app-bg);
+  color: var(--app-text);
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+#root {
+  min-height: 100vh;
+}
