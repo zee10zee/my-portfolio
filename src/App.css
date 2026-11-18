@@ -73,6 +73,17 @@
   line-height: 1.8;
 }
 
+.hero-work-button {
+  --bs-btn-color: var(--app-accent);
+  --bs-btn-border-color: var(--app-accent);
+  --bs-btn-hover-color: var(--app-bg);
+  --bs-btn-hover-bg: var(--app-accent);
+  --bs-btn-hover-border-color: var(--app-accent);
+  --bs-btn-active-color: var(--app-bg);
+  --bs-btn-active-bg: var(--app-accent);
+  --bs-btn-active-border-color: var(--app-accent);
+}
+
 .hero-visual {
   position: relative;
   display: grid;
@@ -233,6 +244,15 @@
   line-height: 1.8;
 }
 
+.about-profile-image {
+  width: min(100%, 32rem);
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--app-border);
+  border-radius: 1.25rem;
+  box-shadow: var(--app-shadow);
+  object-fit: cover;
+}
+
 .skills-groups {
   display: grid;
   gap: 1.25rem;
@@ -268,6 +288,50 @@
 .contribution-description {
   color: var(--app-muted);
   line-height: 1.7;
+}
+
+.contribution-image {
+  width: calc(100% + 2rem);
+  height: 11rem;
+  margin: -1rem -1rem 1.25rem;
+  border-radius: 1rem 1rem 0 0;
+  object-fit: cover;
+}
+
+.certificate-preview {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.52;
+  border: 1px solid var(--app-border);
+  border-radius: 0.6rem;
+  background-color: var(--app-surface);
+  object-fit: contain;
+}
+
+.certificate-unavailable {
+  display: grid;
+  min-height: 12rem;
+  place-items: center;
+  border: 1px dashed var(--app-border);
+  border-radius: 0.6rem;
+  color: var(--app-muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.certificate-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--app-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.certificate-download:hover {
+  color: var(--app-text);
+  text-decoration: underline;
 }
 
 @media (max-width: 767.98px) {

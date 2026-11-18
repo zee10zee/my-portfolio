@@ -21,7 +21,12 @@ export function Hero() {
               <AppButton href="#contact" size="lg">
                 Contact me
               </AppButton>
-              <AppButton color="outline-dark" href="#work" size="lg">
+              <AppButton
+                className="hero-work-button"
+                color="outline-dark"
+                href="#work"
+                size="lg"
+              >
                 See my work
               </AppButton>
               <AppButton

@@ -7,6 +7,7 @@ import {
   AppContainer,
   AppRow,
 } from './ui/AppUI.jsx'
+import { ExternalLink } from 'lucide-react'
 
 export function Contributions() {
   return (
@@ -21,6 +22,12 @@ export function Contributions() {
                 className="contribution-card h-100"
                 bodyClassName="d-flex flex-column align-items-start"
               >
+                <img
+                  alt={`${contribution.title} app preview`}
+                  className="contribution-image"
+                  loading="lazy"
+                  src={contribution.image}
+                />
                 <h3 className="card-title h5 mb-3">{contribution.title}</h3>
                 <p className="card-text contribution-description">
                   {contribution.desc}
@@ -32,13 +39,25 @@ export function Contributions() {
                     </AppBadge>
                   ))}
                 </div>
-                <AppButton
-                  className="mt-auto"
-                  color="outline-primary"
-                  href={contribution.link}
-                >
-                  View details
-                </AppButton>
+                <div className="d-flex flex-wrap gap-2 mt-auto">
+                  <AppButton
+                    color="outline-primary"
+                    href={contribution.link}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    View details
+                  </AppButton>
+                  <AppButton
+                    color="primary"
+                    href={contribution.appLink}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <ExternalLink aria-hidden="true" className="me-2" size={16} />
+                    Check app
+                  </AppButton>
+                </div>
               </AppCard>
             </AppCol>
           ))}
