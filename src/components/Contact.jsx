@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { BriefcaseBusiness, CodeXml, Mail, Phone } from 'lucide-react'
+import emailjs, { EmailJSResponseStatus } from '@emailjs/browser'
 import { profile } from '../data/profile.js'
 import {
   AppButton,
@@ -55,6 +56,7 @@ const contactFields = [
     id: 'contactMsg',
     label: 'Message',
     name: 'message',
+    placeholder: 'Write your message',
     required: true,
     as: 'textarea',
     rows: 3,
@@ -62,28 +64,60 @@ const contactFields = [
 ]
 
 function Contact() {
-  const [formValues, setFormValues] = useState({
-    name: profile.name,
-    email: profile.email,
-    message: '',
-  })
+  const [isSending, setIsSending] = useState(false)
+  const [status, setStatus] = useState(null)
 
-  const handleChange = (event) => {
-    const { name, value } = event.target
-    setFormValues((values) => ({ ...values, [name]: value }))
-  }
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
-    const formData = new FormData(event.currentTarget)
-    const name = formData.get('name')
-    const email = formData.get('email')
-    const message = formData.get('message')
-    const subject = encodeURIComponent(`Portfolio inquiry from ${name}`)
-    const body = encodeURIComponent(`From: ${name} (${email})\n\n${message}`)
+    if (!serviceId || !templateId || !publicKey) {
+      setStatus({
+        type: 'error',
+        message:
+          'Email is not configured yet. Add the EmailJS service ID, template ID, and public key to the environment.',
+      })
+      return
+    }
 
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`
+    setIsSending(true)
+    setStatus(null)
+    const senderName = String(formData.get('name') ?? '')
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          to_email: profile.email,
+          username: senderName,
+          subject: `Portfolio inquiry from ${senderName}`,
+          reply_to: String(formData.get('email') ?? ''),
+          userMessage: String(formData.get('message') ?? ''),
+        },
+        { publicKey },
+      )
+      form.reset()
+      setStatus({ type: 'success', message: 'Your message has been sent.' })
+    } catch (error) {
+      console.error('Unable to send the contact message through EmailJS.', error)
+      const errorDetails =
+        error instanceof EmailJSResponseStatus
+          ? `${error.status}: ${error.text}`
+          : error instanceof Error
+            ? error.message
+            : 'Unexpected EmailJS error'
+      setStatus({
+        type: 'error',
+        message: `Your message could not be sent. ${errorDetails}`,
+      })
+    } finally {
+      setIsSending(false)
+    }
   }
 
   return (
@@ -118,16 +152,26 @@ function Contact() {
                 <AppCard className="h-100 shadow-sm border-0">
                   <AppForm onSubmit={handleSubmit}>
                     {contactFields.map((field) => (
-                      <AppField
-                        key={field.id}
-                        {...field}
-                        onChange={handleChange}
-                        value={formValues[field.name]}
-                      />
+                      <AppField key={field.id} {...field} />
                     ))}
-                    <AppButton className="w-100" type="submit">
-                      Send
+                    <AppButton
+                      className="w-100"
+                      disabled={isSending}
+                      type="submit"
+                    >
+                      {isSending ? 'Sending...' : 'Send'}
                     </AppButton>
+                    {status && (
+                      <p
+                        aria-live="polite"
+                        className={`mt-3 mb-0 ${
+                          status.type === 'success' ? 'text-success' : 'text-danger'
+                        }`}
+                        role="status"
+                      >
+                        {status.message}
+                      </p>
+                    )}
                   </AppForm>
                 </AppCard>
               </AppCol>

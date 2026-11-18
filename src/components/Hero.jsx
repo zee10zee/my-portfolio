@@ -18,14 +18,14 @@ export function Hero() {
             <p className="hero-role mb-3">{profile.title}</p>
             <p className="hero-summary mb-4">{profile.intro}</p>
             <div className="d-flex flex-wrap gap-3">
-              <AppButton href="#contact" size="lg">
+              <AppButton href="#contact" size="md">
                 Contact me
               </AppButton>
               <AppButton
                 className="hero-work-button"
                 color="outline-dark"
                 href="#work"
-                size="lg"
+                size="md"
               >
                 See my work
               </AppButton>
@@ -33,7 +33,7 @@ export function Hero() {
                 color="outline-primary"
                 download="Abed-Khan-Noori-CV.pdf"
                 href="/Abed-Khan-Noori-CV.pdf"
-                size="lg"
+                size="md"
               >
                 <Download aria-hidden="true" className="me-2" size={18} />
                 Download CV
