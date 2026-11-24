@@ -97,6 +97,7 @@ function Contact() {
         {
           to_email: profile.email,
           username: senderName,
+          from_name : senderName,
           subject: `Portfolio inquiry from ${senderName}`,
           reply_to: String(formData.get('email') ?? ''),
           userMessage: String(formData.get('message') ?? ''),
