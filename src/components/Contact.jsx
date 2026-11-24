@@ -34,6 +34,8 @@ const contactLinks = [
   },
 ]
 
+console.log(profile, 'profile');
+
 const contactFields = [
   {
     id: 'contactName',
